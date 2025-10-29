@@ -7,6 +7,8 @@ from pathlib import Path
 
 SESSION_FILE = Path.home() / ".config" / "hypr" / "session.json"
 
+# TODO: add more app entries
+
 APP_MAP = {
     "firefox": "firefox",
     "code": "code",
