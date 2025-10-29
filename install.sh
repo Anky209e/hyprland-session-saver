@@ -6,7 +6,7 @@ set -e
 SCRIPT_NAME="hypr-session"
 INSTALL_DIR="$HOME/.local/bin"
 SCRIPT_PATH="$INSTALL_DIR/$SCRIPT_NAME"
-CONFIG_FILE="$HOME/.config/hypr/hyprland.conf"
+CONFIG_FILE="$HOME/.config/hypr/autostart.conf"
 SRC_SCRIPT="./hypr_session.py"
 
 echo "Installing Hyprland Session Saver..."
@@ -35,9 +35,9 @@ if [[ -f "$CONFIG_FILE" ]]; then
     if ! grep -q "hypr-session" "$CONFIG_FILE"; then
         echo "" >> "$CONFIG_FILE"
         echo "# --- Session Saver Integration ---" >> "$CONFIG_FILE"
-        echo "exec-on = lock, hypr-session save" >> "$CONFIG_FILE"
-        echo "exec-on = prelogout, hypr-session save" >> "$CONFIG_FILE"
-        echo "exec-on = shutdown, hypr-session save" >> "$CONFIG_FILE"
+        # echo "exec-on = lock, hypr-session save" >> "$CONFIG_FILE"
+        # echo "exec-on = prelogout, hypr-session save" >> "$CONFIG_FILE"
+        # echo "exec-on = shutdown, hypr-session save" >> "$CONFIG_FILE"
         echo "exec-once = hypr-session restore" >> "$CONFIG_FILE"
         echo "Added hooks to $CONFIG_FILE"
     else
