@@ -18,6 +18,8 @@ APP_MAP = {
     "chrome-keep.google.com__-Default": "chromium -app=https://keep.google.com",
     "chrome-drive.google.com__-Default": "chromium -app=https://drive.google.com",
     "chrome-web.whatsapp.com__-Default": "chromium -app=https://web.whatsapp.com",
+    "li.oever.aether": "aether",
+    "org.gnome.Evince": "evince",
     "Brave-browser": "brave-browser",
     "dev.zed.Zed": "zeditor",
 }
@@ -82,7 +84,7 @@ def restore_session():
             skipped += 1
             continue
 
-        launch = f"[workspace {workspace}] {cmd}"
+        launch = f"[workspace {workspace}] uwsm app -- {cmd}"
         subprocess.run(["hyprctl", "dispatch", "exec", launch])
         restored += 1
 
