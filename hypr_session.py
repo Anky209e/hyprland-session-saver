@@ -23,14 +23,14 @@ APP_MAP = {
     "chrome-github.com__-Default": "chromium -app=https://github.com",
     "li.oever.aether": "aether",
     "org.gnome.Evince": "evince",
-    "discord": "discord",
     "Spotify": "spotify",
     "signal": "signal",
     "Godot": "godot",
     "org.kde.kdenlive": "kdenlive",
-    "obsidion": "obsidion",
+    "obsidian": "obsidian",
     "Brave-browser": "brave-browser",
     "dev.zed.Zed": "zeditor",
+    #    "discord": "discord", # Discord is having some issues
 }
 
 
