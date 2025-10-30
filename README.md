@@ -20,3 +20,5 @@ It will automatically restore your apps on it next power on
 
 #TODO: add walker entry in install script for saving session
 #TODO: add nvim support
+#TODO: add TUI   
+#TODO: add profiles for work and study 
