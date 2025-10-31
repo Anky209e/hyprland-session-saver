@@ -21,6 +21,9 @@ APP_MAP = {
     "Spotify": "spotify",
     "Brave-browser": "brave-browser",
     "obsidian": "obsidian",
+    "org.gnome.Calculator": "gnome-calculator",
+    "chromium": "chromium",
+    "com.obsproject.Studio": "obs",
 }
 
 
