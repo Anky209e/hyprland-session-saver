@@ -24,6 +24,7 @@ APP_MAP = {
     "org.gnome.Calculator": "gnome-calculator",
     "chromium": "chromium",
     "com.obsproject.Studio": "obs",
+    "heroic": "heroic",
 }
 
 
