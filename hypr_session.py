@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 import json
+import os
 import subprocess
 import sys
-import os
 from pathlib import Path
 
 SESSION_FILE = Path.home() / ".config" / "hypr" / "session.json"
@@ -25,6 +25,7 @@ APP_MAP = {
     "chromium": "chromium",
     "com.obsproject.Studio": "obs",
     "heroic": "heroic",
+    "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
 }
 
 

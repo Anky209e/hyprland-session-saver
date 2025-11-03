@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-import sys
 import subprocess
+import sys
 from pathlib import Path
-from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
-from PyQt6.QtGui import QIcon, QAction
+
+from PyQt6.QtGui import QAction, QIcon
+from PyQt6.QtWidgets import QApplication, QMenu, QSystemTrayIcon
 
 HYPR_SESSION_CMD = "hypr-session"
 
