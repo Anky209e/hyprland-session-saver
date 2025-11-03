@@ -26,7 +26,6 @@ def main():
     if icon.isNull():
         # optional: create a default icon if not exists
         if not ICON_PATH.exists():
-            import base64
             from PIL import Image, ImageDraw
 
             img = Image.new("RGBA", (64, 64), (255, 255, 255, 255))
