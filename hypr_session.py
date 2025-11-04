@@ -25,6 +25,8 @@ APP_MAP = {
     "chromium": "chromium",
     "com.obsproject.Studio": "obs",
     "heroic": "heroic",
+    "libreoffice-writer": "libreoffice",
+    "libreoffice": "libreoffice",
     "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
 }
 
