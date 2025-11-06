@@ -18,6 +18,8 @@ APP_MAP = {
     "chrome-drive.google.com__-Default": "chromium -app=https://drive.google.com",
     "chrome-web.whatsapp.com__-Default": "chromium -app=https://web.whatsapp.com",
     "chrome-github.com__-Default": "chromium -app=https://github.com",
+    "chrome-youtube.com__-Default":"chromium -app=https://yoututbe.com"
+    "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
     "Spotify": "spotify",
     "Brave-browser": "brave-browser",
     "obsidian": "obsidian",
@@ -27,7 +29,6 @@ APP_MAP = {
     "heroic": "heroic",
     "libreoffice-writer": "libreoffice",
     "libreoffice": "libreoffice",
-    "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
 }
 
 
