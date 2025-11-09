@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import json
 import os
 import subprocess
@@ -18,7 +17,7 @@ APP_MAP = {
     "chrome-drive.google.com__-Default": "chromium -app=https://drive.google.com",
     "chrome-web.whatsapp.com__-Default": "chromium -app=https://web.whatsapp.com",
     "chrome-github.com__-Default": "chromium -app=https://github.com",
-    "chrome-youtube.com__-Default":"chromium -app=https://yoututbe.com"
+    "chrome-youtube.com__-Default": "chromium -app=https://youtube.com",
     "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
     "Spotify": "spotify",
     "Brave-browser": "brave-browser",
@@ -47,7 +46,6 @@ def get_clients():
 
 
 def get_child_pid(pid: int):
-    """Find the shell or nvim process that is a child of Alacritty."""
     try:
         ps = (
             subprocess.run(
@@ -60,7 +58,6 @@ def get_child_pid(pid: int):
         )
         if not ps:
             return None
-        # Prefer nvim > zsh/bash/fish
         for line in ps:
             if "nvim" in line:
                 return int(line.split()[0])
@@ -73,7 +70,6 @@ def get_child_pid(pid: int):
 
 
 def get_cwd(pid: int):
-    """Get CWD of process (using /proc)."""
     try:
         return os.readlink(f"/proc/{pid}/cwd")
     except Exception:
@@ -81,7 +77,6 @@ def get_cwd(pid: int):
 
 
 def is_nvim_running(pid: int):
-    """Check recursively if nvim is running in the process tree."""
     try:
         children = (
             subprocess.run(["pgrep", "-P", str(pid)], capture_output=True, text=True)
@@ -101,6 +96,20 @@ def is_nvim_running(pid: int):
         return False
 
 
+def get_mpv_file(pid: int):
+    """Extract video file path from mpv process command line."""
+    try:
+        with open(f"/proc/{pid}/cmdline", "r") as f:
+            cmdline = f.read().split("\0")
+        # The last argument is usually the video file
+        for arg in reversed(cmdline):
+            if arg and not arg.startswith("-") and Path(arg).exists():
+                return arg
+    except Exception:
+        pass
+    return None
+
+
 def save_session():
     clients = get_clients()
     session_data = []
@@ -112,7 +121,6 @@ def save_session():
 
         workspace = c["workspace"]["name"] if c.get("workspace") else "1"
         pid = c.get("pid")
-
         entry = {"class": app_class, "workspace": workspace}
 
         if app_class.lower() == "alacritty" and pid:
@@ -121,6 +129,13 @@ def save_session():
             in_nvim = is_nvim_running(pid)
             entry["cwd"] = cwd
             entry["in_nvim"] = in_nvim
+
+        elif app_class.lower() == "mpv" and pid:
+            mpv_file = get_mpv_file(pid)
+            entry["mpv_file"] = mpv_file
+            entry["cwd"] = None
+            entry["in_nvim"] = False
+
         else:
             entry["cwd"] = None
             entry["in_nvim"] = False
@@ -158,6 +173,16 @@ def restore_session():
                     cmd = f"alacritty --working-directory '{cwd}'"
             else:
                 cmd = "alacritty"
+
+        elif app_class.lower() == "mpv":
+            mpv_file = entry.get("mpv_file")
+            if mpv_file and Path(mpv_file).exists():
+                cmd = f"mpv --pause '{mpv_file}'"
+            else:
+                notify(f"MPV skipped (missing file: {mpv_file})", "low")
+                skipped += 1
+                continue
+
         else:
             cmd = APP_MAP.get(app_class)
 
