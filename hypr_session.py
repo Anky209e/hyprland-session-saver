@@ -21,6 +21,7 @@ APP_MAP = {
     "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
     "Spotify": "spotify",
     "Brave-browser": "brave-browser",
+    "zen": "zen-browser",
     "obsidian": "obsidian",
     "org.gnome.Calculator": "gnome-calculator",
     "chromium": "chromium",
