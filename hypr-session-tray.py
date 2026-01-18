@@ -13,9 +13,8 @@ ICON_PATH = Path.home() / ".local/share/icons/hypr-session.png"
 
 
 def run_command(action):
-    """Run hypr-session save/restore/clear with notify-send"""
+    """Run hypr-session save/restore/clear."""
     subprocess.run([HYPR_SESSION_CMD, action])
-    subprocess.run(["notify-send", f"Hypr Session: {action.capitalize()} executed"])
 
 
 def main():
