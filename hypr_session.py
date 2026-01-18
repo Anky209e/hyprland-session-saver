@@ -4,32 +4,20 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+import importlib.util
 
 SESSION_FILE = Path.home() / ".config" / "hypr" / "session.json"
+CONFIG_FILE = Path.home() / ".config" / "hypr-session" / "config.py"
 
-APP_MAP = {
-    "firefox": "firefox",
-    "code": "code",
-    "thunar": "thunar",
-    "org.gnome.Nautilus": "nautilus",
-    "chrome-chatgpt.com__-Default": "chromium -app=https://chat.openai.com",
-    "chrome-keep.google.com__-Default": "chromium -app=https://keep.google.com",
-    "chrome-drive.google.com__-Default": "chromium -app=https://drive.google.com",
-    "chrome-web.whatsapp.com__-Default": "chromium -app=https://web.whatsapp.com",
-    "chrome-github.com__-Default": "chromium -app=https://github.com",
-    "chrome-youtube.com__-Default": "chromium -app=https://youtube.com",
-    "chrome-www.udemy.com__home_my-courses_learning_-Default": "chromium -app=https://www.udemy.com/home/my-courses/learning/",
-    "Spotify": "spotify",
-    "Brave-browser": "brave-browser",
-    "zen": "zen-browser",
-    "obsidian": "obsidian",
-    "org.gnome.Calculator": "gnome-calculator",
-    "chromium": "chromium",
-    "com.obsproject.Studio": "obs",
-    "heroic": "heroic",
-    "libreoffice-writer": "libreoffice",
-    "libreoffice": "libreoffice",
-}
+try:
+    # Try to import user-specific config
+    spec = importlib.util.spec_from_file_location("config", CONFIG_FILE)
+    config = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(config)
+    APP_MAP = config.APP_MAP
+except (FileNotFoundError, AttributeError):
+    # Fallback to local config
+    from config import APP_MAP
 
 
 def notify(msg: str, urgency: str = "normal"):
